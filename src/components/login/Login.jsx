@@ -65,7 +65,7 @@ const Login = () => {
         }catch(error){
 
             console.error('Login failed',error)
-            setError(error.message)
+            setError("Unauthorized access")
             setErrorStatus(true)
         }
     }

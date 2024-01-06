@@ -3,6 +3,8 @@ import axios from "axios";
 import sha256 from "crypto-js/sha256";
 
 import { Alert, Button, Container, FormControl, Snackbar, TextField, Typography } from "@mui/material";
+import useAuth from "../../context/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
 
@@ -11,6 +13,8 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [errorStatus, setErrorStatus] = useState(false);
+    const {setAuth} = useAuth();
+    const navigate = useNavigate();
 
     // hashing password function
 
@@ -54,8 +58,10 @@ const Login = () => {
             })
 
             const {data} = response
-            const token = data?.response?.access_token;
-            console.log(token)
+            const accessToken = data?.response?.access_token;
+            localStorage.setItem("token", accessToken)
+            setAuth(accessToken)
+            navigate('/products')
         }catch(error){
 
             console.error('Login failed',error)

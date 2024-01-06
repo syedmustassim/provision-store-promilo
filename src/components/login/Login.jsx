@@ -36,12 +36,12 @@ const Login = () => {
         e.preventDefault();
 
         // validate email and password 
-        
+
         if(!validateEmail(username) || !validatePassword(password)){
             setErrorStatus(true)
             setError("Invalid email or password")
             return;
-        }
+        }   
 
         // login handling 
 
@@ -75,27 +75,25 @@ const Login = () => {
 
 
         <Container component="main" maxWidth="xs">
-            <Typography>
+            <Typography variant="h4">
                 Login
             </Typography>
             <FormControl>
                 <TextField 
                     variant="outlined"
                     margin="normal"
-                    fullWidth
                     label="Email"
                     name="username"
                     type="email"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     error={validateEmail(username)}
-                    helperText={!validateEmail(username) && "Invalid email"}
+                    helperText={!validateEmail(username) && username.length > 0 && "Invalid email"}
                     required
                 />
                 <TextField
                     variant="outlined"
                     margin="normal"
-                    fullWidth
                     label="Password"
                     name="password"
                     type="password"
